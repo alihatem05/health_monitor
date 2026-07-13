@@ -50,3 +50,9 @@ async def get_history(service_id: str, limit: int = 50) -> list[CheckResult]:
             .limit(limit)
         )
         return result.scalars().all()
+    
+
+async def get_service_by_url(url: str) -> Service | None:
+    async with async_session() as db:
+        result = await db.execute(select(Service).where(Service.url == url))
+        return result.scalar_one_or_none()

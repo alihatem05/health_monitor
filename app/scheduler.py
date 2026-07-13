@@ -59,3 +59,9 @@ async def start_all_loops():
         await start_service_loop(service)
     asyncio.create_task(flusher_loop())
     log("SCHEDULER", f"Startup complete. {len(services)} service loop(s) running")
+
+async def stop_all_loops():
+    service_ids = list(state.running_loops.keys())
+    for service_id in service_ids:
+        await stop_service_loop(service_id)
+    log("SCHEDULER", f"Stopped {len(service_ids)} service loop(s)")

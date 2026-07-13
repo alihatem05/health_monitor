@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentinel Dashboard</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 2rem;
+    }
+    h1 { margin-bottom: 1rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #333;
+    }
+    th { color: #999; font-weight: normal; }
+    .status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .healthy { background: #2ecc71; }
+    .unhealthy { background: #e74c3c; }
+    .timeout { background: #f39c12; }
+    .unknown { background: #555; }
+  </style>
+</head>
+<body>
+  <h1>Sentinel</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>URL</th>
+        <th>Status</th>
+        <th>Check Interval</th>
+      </tr>
+    </thead>
+    <tbody id="service-rows">
+      <!-- rows inserted by JS -->
+    </tbody>
+  </table>
+
+  <script>
+    const API_BASE = "http://localhost:8000";
+    const POLL_INTERVAL_MS = 5000;
+
+    async function fetchServices() {
+      const res = await fetch(`${API_BASE}/services`);
+      return res.json();
+    }
+
+    async function fetchStatus(serviceId) {
+      const res = await fetch(`${API_BASE}/services/${serviceId}/status`);
+      return res.json();
+    }
+
+    function statusClass(status) {
+      if (status === "healthy") return "healthy";
+      if (status === "unhealthy") return "unhealthy";
+      if (status === "timeout") return "timeout";
+      return "unknown";
+    }
+
+    async function renderDashboard() {
+      const services = await fetchServices();
+      const tbody = document.getElementById("service-rows");
+      tbody.innerHTML = "";
+
+      for (const service of services) {
+        const statusData = await fetchStatus(service.id);
+        const status = statusData.status || "unknown";
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${service.name}</td>
+          <td>${service.url}</td>
+          <td><span class="status-dot ${statusClass(status)}"></span>${status}</td>
+          <td>${service.check_interval_s}s</td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
+
+    renderDashboard();
+    setInterval(renderDashboard, POLL_INTERVAL_MS);
+  </script>
+</body>
+</html>
