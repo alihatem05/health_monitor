@@ -1,0 +1,49 @@
+networks:
+  health-monitor-net:
+
+services:
+  health-monitor:
+    build: .
+    env_file: .env
+    ports: 
+      - "8000:8000"
+    networks:
+      - health-monitor-net
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=13030555a
+      - POSTGRES_DB=health-monitor-db
+    volumes:
+      - health_monitor_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - health-monitor-net
+    
+  dummy-a:
+    build: ./dummy
+    environment:
+      - SERVICE_NAME=service-a
+      - HEALTH_STATUS=healthy
+    networks:
+      - health-monitor-net
+
+  dummy-b:
+    build: ./dummy
+    environment:
+      - SERVICE_NAME=service-b
+      - HEALTH_STATUS=unhealthy
+    networks:
+      - health-monitor-net
+
+volumes:
+  health_monitor_pgdata:

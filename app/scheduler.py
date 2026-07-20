@@ -5,6 +5,8 @@ from app.checker import check_service
 from app.models import Service
 from app.config import FLUSH_INTERVAL
 from app.log import log
+from app.database import async_session
+
 
 async def check_loop(service: Service):
     service_id = str(service.id)
@@ -27,11 +29,13 @@ async def check_loop(service: Service):
 
         await asyncio.sleep(service.check_interval_s)
 
+
 def handle_alert(service: Service, old_status: str | None, new_status: str):
     if old_status is None:
         log("INFO", f"{service.name} first check: {new_status}")
     else:
         log("ALERT", f"{service.name} changed: {old_status} -> {new_status}")
+
 
 async def flusher_loop():
     while True:
@@ -39,13 +43,16 @@ async def flusher_loop():
         if state.pending_results:
             batch = state.pending_results.copy()
             state.pending_results.clear()
-            await crud.save_check_results(batch)
+            async with async_session() as db:
+                await crud.save_check_results(db, batch)
             log("DATABASE", f"Flushed {len(batch)} check result(s) to DB")
+
 
 async def start_service_loop(service: Service):
     task = asyncio.create_task(check_loop(service))
     state.running_loops[str(service.id)] = task
     log("SCHEDULER", f"Started check loop for '{service.name}' ({service.id})")
+
 
 async def stop_service_loop(service_id: str):
     task = state.running_loops.pop(service_id, None)
@@ -53,15 +60,24 @@ async def stop_service_loop(service_id: str):
         task.cancel()
         log("SCHEDULER", f"Stopped check loop for {service_id}")
 
+
 async def start_all_loops():
-    services = await crud.get_all_services()
+    async with async_session() as db:
+        services = await crud.get_all_services(db)
     for service in services:
         await start_service_loop(service)
-    asyncio.create_task(flusher_loop())
+    state.flusher_task = asyncio.create_task(flusher_loop())
     log("SCHEDULER", f"Startup complete. {len(services)} service loop(s) running")
+
 
 async def stop_all_loops():
     service_ids = list(state.running_loops.keys())
     for service_id in service_ids:
         await stop_service_loop(service_id)
+
+    flusher_task = getattr(state, "flusher_task", None)
+    if flusher_task:
+        flusher_task.cancel()
+        state.flusher_task = None
+
     log("SCHEDULER", f"Stopped {len(service_ids)} service loop(s)")

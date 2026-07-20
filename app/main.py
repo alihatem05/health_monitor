@@ -1,10 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from contextlib import asynccontextmanager
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Base
-from app.database import engine
+from app.database import engine, get_db
 from app.scheduler import start_all_loops, start_service_loop, stop_service_loop, stop_all_loops
 from app.state import running_loops, last_known_status
-from app.crud import (create_service as crud_create_service, get_all_services, delete_service as crud_delete_service, get_history, get_service_by_url)
+from app import crud
 from app.schemas import ServiceCreate, Service, Result, Status
 from app.log import log
 from fastapi.staticfiles import StaticFiles
@@ -36,16 +37,18 @@ app.add_middleware(
 
 app.mount("/dashboard", StaticFiles(directory="static", html=True), name="dashboard")
 
+
 @app.post("/services", response_model=Service)
-async def create_service(service: ServiceCreate):
-    existing = await get_service_by_url(service.url)
+async def create_service(service: ServiceCreate, db: AsyncSession = Depends(get_db)):
+    existing = await crud.get_service_by_url(db, service.url)
     if existing:
         service_id = str(existing.id)
         if service_id not in running_loops:
             await start_service_loop(existing)
         return existing
 
-    new_service = await crud_create_service(
+    new_service = await crud.create_service(
+        db,
         name=service.name,
         url=service.url,
         check_interval_s=service.check_interval_s,
@@ -53,26 +56,30 @@ async def create_service(service: ServiceCreate):
     await start_service_loop(new_service)
     return new_service
 
+
 @app.get("/services", response_model=list[Service])
-async def list_services():
-    return await get_all_services()
+async def list_services(db: AsyncSession = Depends(get_db)):
+    return await crud.get_all_services(db)
+
 
 @app.delete("/services/{service_id}")
-async def delete_service(service_id: str):
-    deleted = await crud_delete_service(service_id)
+async def delete_service(service_id: str, db: AsyncSession = Depends(get_db)):
+    deleted = await crud.delete_service(db, service_id)
     if not deleted:
         raise HTTPException(status_code=404, detail="Service not found")
     await stop_service_loop(service_id)
     return {"deleted": True}
+
 
 @app.get("/services/{service_id}/status", response_model=Status)
 async def service_status(service_id: str):
     status = last_known_status.get(service_id)
     return Status(service_id=service_id, status=status)
 
+
 @app.get("/services/{service_id}/history", response_model=list[Result])
-async def service_history(service_id: str):
-    return await get_history(service_id)
+async def service_history(service_id: str, db: AsyncSession = Depends(get_db)):
+    return await crud.get_history(db, service_id)
 
 
 @app.post("/services/stop-all")
@@ -80,3 +87,8 @@ async def stop_all_services():
     count = len(running_loops)
     await stop_all_loops()
     return {"stopped": count}
+
+
+@app.get("/")
+def root_route():
+    return {"message": "Hello! :)"}

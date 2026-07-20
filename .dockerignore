@@ -1,0 +1,11 @@
+venv/
+.env
+.git
+__pycache__/
+*.pyc
+*.pyo
+health_monitor.log
+.gitignore
+dummy/
+static/.DS_Store
+scripts/

@@ -2,3 +2,7 @@ fastapi[standard]
 uvicorn
 sqlalchemy
 asyncpg
+pytest
+pytest-asyncio
+pytest-mock
+asgi_lifespan

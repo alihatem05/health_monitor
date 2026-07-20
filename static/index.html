@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sentinel Dashboard</title>
+  <title>Health Monitor Dashboard</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -35,7 +35,7 @@
   </style>
 </head>
 <body>
-  <h1>Sentinel</h1>
+  <h1>Health Monitor Dashboard</h1>
   <table>
     <thead>
       <tr>
@@ -46,21 +46,20 @@
       </tr>
     </thead>
     <tbody id="service-rows">
-      <!-- rows inserted by JS -->
     </tbody>
   </table>
 
   <script>
-    const API_BASE = "http://localhost:8000";
+    const BASE_URL = "http://localhost:8000";
     const POLL_INTERVAL_MS = 5000;
 
     async function fetchServices() {
-      const res = await fetch(`${API_BASE}/services`);
+      const res = await fetch(`${BASE_URL}/services`);
       return res.json();
     }
 
     async function fetchStatus(serviceId) {
-      const res = await fetch(`${API_BASE}/services/${serviceId}/status`);
+      const res = await fetch(`${BASE_URL}/services/${serviceId}/status`);
       return res.json();
     }
 
