@@ -41,14 +41,12 @@ async def db_session():
             await conn.execute(table.delete())
 
 @pytest_asyncio.fixture
-async def client(db_session: AsyncSession):
+async def client(db_session: AsyncSession, monkeypatch):
     async def override_get_db():
         yield db_session
     app.dependency_overrides[get_db] = override_get_db
+    monkeypatch.setattr("app.scheduler.async_session", TestingSessionLocal)
     transport = ASGITransport(app=app)
-    async with AsyncClient(
-        transport=transport,
-        base_url="http://test",
-    ) as client:
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         yield client
     app.dependency_overrides.clear()

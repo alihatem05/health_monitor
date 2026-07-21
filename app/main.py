@@ -3,13 +3,14 @@ from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Base
 from app.database import engine, get_db
-from app.scheduler import start_all_loops, start_service_loop, stop_service_loop, stop_all_loops
-from app.state import running_loops, last_known_status
+from app.scheduler import start_all_loops, start_service_loop, stop_service_loop, stop_all_loops, flush
+from app.state import running_loops, last_known_status, pending_results
 from app import crud
 from app.schemas import ServiceCreate, Service, Result, Status
 from app.log import log
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+import asyncio
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,10 +22,12 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    for task in running_loops.values():
-        task.cancel()
+    await stop_all_loops()
 
-    log("INFO", "Health Monitor Server has stopped running")
+    if pending_results:
+        batch = pending_results.copy()
+        pending_results.clear()
+        await flush(batch)
 
 app = FastAPI(title="Sentinel", lifespan=lifespan)
 
@@ -64,10 +67,12 @@ async def list_services(db: AsyncSession = Depends(get_db)):
 
 @app.delete("/services/{service_id}")
 async def delete_service(service_id: str, db: AsyncSession = Depends(get_db)):
+    await stop_service_loop(service_id)
+
     deleted = await crud.delete_service(db, service_id)
     if not deleted:
         raise HTTPException(status_code=404, detail="Service not found")
-    await stop_service_loop(service_id)
+
     return {"deleted": True}
 
 

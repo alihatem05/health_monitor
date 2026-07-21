@@ -36,6 +36,9 @@ def handle_alert(service: Service, old_status: str | None, new_status: str):
     else:
         log("ALERT", f"{service.name} changed: {old_status} -> {new_status}")
 
+async def flush(batch):
+    async with async_session() as db:
+            await crud.save_check_results(db, batch)
 
 async def flusher_loop():
     while True:
@@ -43,8 +46,7 @@ async def flusher_loop():
         if state.pending_results:
             batch = state.pending_results.copy()
             state.pending_results.clear()
-            async with async_session() as db:
-                await crud.save_check_results(db, batch)
+            await flush(batch)
             log("DATABASE", f"Flushed {len(batch)} check result(s) to DB")
 
 
@@ -56,9 +58,20 @@ async def start_service_loop(service: Service):
 
 async def stop_service_loop(service_id: str):
     task = state.running_loops.pop(service_id, None)
+
     if task:
         task.cancel()
+        await asyncio.gather(task, return_exceptions=True)
         log("SCHEDULER", f"Stopped check loop for {service_id}")
+
+    # Drop any result for this service that got appended between the
+    # last check completing and the cancellation landing — cancel()
+    # only interrupts at the next await point (the sleep), so a check
+    # that already returned and was mid-append when cancel() was called
+    # still completes its append.
+    state.pending_results[:] = [
+        r for r in state.pending_results if str(r["service_id"]) != service_id
+    ]
 
 
 async def start_all_loops():
