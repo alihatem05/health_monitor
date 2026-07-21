@@ -1016,3 +1016,186 @@
 [2026-07-20 17:48:54.117] DATABASE - Deleted service 'dummy' (07d85f45-6f46-48d5-8aa6-7a2c5b7e4ff0)
 [2026-07-20 17:48:54.119] SCHEDULER - Stopped check loop for 07d85f45-6f46-48d5-8aa6-7a2c5b7e4ff0
 [2026-07-20 17:48:54.121] INFO - Health Monitor Server has stopped running
+[2026-07-21 22:11:32.658] SCHEDULER - Started check loop for 'service B' (58d53a3e-c4da-4c7b-92da-7b586343bb89)
+[2026-07-21 22:11:32.659] SCHEDULER - Started check loop for 'service C' (9b68409d-59b4-4c83-8732-4fef622b3885)
+[2026-07-21 22:11:32.659] SCHEDULER - Started check loop for 'service D' (b068fa5a-df05-4fd0-bdbe-7296ab5b54cb)
+[2026-07-21 22:11:32.660] SCHEDULER - Started check loop for 'dummy' (a81a9fa3-81c7-4fad-92f2-0164713cdb43)
+[2026-07-21 22:11:32.661] SCHEDULER - Started check loop for 'dummy' (4c2fef08-69ba-4d05-826a-449f725e66f7)
+[2026-07-21 22:11:32.661] SCHEDULER - Started check loop for 'dummy' (eff9ab64-42b6-40f7-8536-050ed7a8f9c8)
+[2026-07-21 22:11:32.662] SCHEDULER - Started check loop for 'dummy' (c7360cf3-0bb6-4545-a000-ddd4e808a17e)
+[2026-07-21 22:11:32.662] SCHEDULER - Started check loop for 'dummy' (b916b1d4-a70f-4feb-a962-6b173305fc39)
+[2026-07-21 22:11:32.663] SCHEDULER - Started check loop for 'dummy' (4d4c2c25-f41f-48d1-ad17-c202e02ec59f)
+[2026-07-21 22:11:32.663] SCHEDULER - Started check loop for 'dummy' (afa6dc7b-e592-404a-b4e1-e8e5a3463aeb)
+[2026-07-21 22:11:32.664] SCHEDULER - Startup complete. 10 service loop(s) running
+[2026-07-21 22:11:32.664] INFO - Health Monitor Server has started running
+[2026-07-21 22:11:35.176] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:35.177] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:35.180] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.183] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.185] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.186] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.187] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.188] INFO - dummy first check: healthy
+[2026-07-21 22:11:35.191] DATABASE - Created service 'dummy' (9ecfd92d-6328-4fc8-9a5b-0fa5574f49ce) -> http://127.0.0.1:9000/health?t=3072fd47b64f4fccbebddbde2a516199
+[2026-07-21 22:11:35.192] SCHEDULER - Started check loop for 'dummy' (9ecfd92d-6328-4fc8-9a5b-0fa5574f49ce)
+[2026-07-21 22:11:35.433] INFO - dummy first check: healthy
+[2026-07-21 22:11:38.065] ERROR - Failed checking http://127.0.0.1:5002: All connection attempts failed
+[2026-07-21 22:11:38.066] INFO - service B first check: unhealthy
+[2026-07-21 22:11:38.068] ERROR - Failed checking http://127.0.0.1:5004: All connection attempts failed
+[2026-07-21 22:11:38.068] INFO - service D first check: unhealthy
+[2026-07-21 22:11:38.069] ERROR - Failed checking http://127.0.0.1:5003: All connection attempts failed
+[2026-07-21 22:11:38.069] INFO - service C first check: unhealthy
+[2026-07-21 22:11:38.078] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:41.432] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:41.510] DATABASE - Flushed 19 check result(s) to DB
+[2026-07-21 22:11:41.711] DATABASE - Deleted service 'dummy' (9ecfd92d-6328-4fc8-9a5b-0fa5574f49ce)
+[2026-07-21 22:11:41.712] SCHEDULER - Stopped check loop for 9ecfd92d-6328-4fc8-9a5b-0fa5574f49ce
+[2026-07-21 22:11:41.713] INFO - Health Monitor Server has stopped running
+[2026-07-21 22:11:41.727] SCHEDULER - Started check loop for 'service B' (58d53a3e-c4da-4c7b-92da-7b586343bb89)
+[2026-07-21 22:11:41.728] SCHEDULER - Started check loop for 'service C' (9b68409d-59b4-4c83-8732-4fef622b3885)
+[2026-07-21 22:11:41.728] SCHEDULER - Started check loop for 'service D' (b068fa5a-df05-4fd0-bdbe-7296ab5b54cb)
+[2026-07-21 22:11:41.729] SCHEDULER - Started check loop for 'dummy' (a81a9fa3-81c7-4fad-92f2-0164713cdb43)
+[2026-07-21 22:11:41.730] SCHEDULER - Started check loop for 'dummy' (4c2fef08-69ba-4d05-826a-449f725e66f7)
+[2026-07-21 22:11:41.730] SCHEDULER - Started check loop for 'dummy' (eff9ab64-42b6-40f7-8536-050ed7a8f9c8)
+[2026-07-21 22:11:41.731] SCHEDULER - Started check loop for 'dummy' (c7360cf3-0bb6-4545-a000-ddd4e808a17e)
+[2026-07-21 22:11:41.731] SCHEDULER - Started check loop for 'dummy' (b916b1d4-a70f-4feb-a962-6b173305fc39)
+[2026-07-21 22:11:41.732] SCHEDULER - Started check loop for 'dummy' (4d4c2c25-f41f-48d1-ad17-c202e02ec59f)
+[2026-07-21 22:11:41.732] SCHEDULER - Started check loop for 'dummy' (afa6dc7b-e592-404a-b4e1-e8e5a3463aeb)
+[2026-07-21 22:11:41.733] SCHEDULER - Startup complete. 10 service loop(s) running
+[2026-07-21 22:11:41.733] INFO - Health Monitor Server has started running
+[2026-07-21 22:11:44.087] ERROR - http://127.0.0.1:9000/health?t=5958c4b983da429a99bc6a6cdec37467 returned HTTP 500
+[2026-07-21 22:11:44.088] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.089] ERROR - http://127.0.0.1:9000/health?t=5500d48a7a9141d8b5fac7462104ad2a returned HTTP 500
+[2026-07-21 22:11:44.090] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.090] ERROR - http://127.0.0.1:9000/health?t=4e44e564bfa74fdb9dc6fad033ad4fe6 returned HTTP 500
+[2026-07-21 22:11:44.091] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.091] ERROR - http://127.0.0.1:9000/health?t=30db5cc78c5f4a08bfaee517dab53445 returned HTTP 500
+[2026-07-21 22:11:44.092] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.092] ERROR - http://127.0.0.1:9000/health?t=3075f01e16c74208ba66850748d581f4 returned HTTP 500
+[2026-07-21 22:11:44.093] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.093] ERROR - http://127.0.0.1:9000/health?t=7c0c99420fb04d6197f7b6286bf72bbc returned HTTP 500
+[2026-07-21 22:11:44.094] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.094] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:44.095] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:44.097] DATABASE - Created service 'dummy' (bc1e1da3-4d10-49fd-9c0d-673e39cc485d) -> http://127.0.0.1:9000/health?t=5748a05e5c8e4e93b6166371199a6011
+[2026-07-21 22:11:44.097] SCHEDULER - Started check loop for 'dummy' (bc1e1da3-4d10-49fd-9c0d-673e39cc485d)
+[2026-07-21 22:11:44.358] ERROR - http://127.0.0.1:9000/health?t=5748a05e5c8e4e93b6166371199a6011 returned HTTP 500
+[2026-07-21 22:11:44.358] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:46.942] ERROR - Failed checking http://127.0.0.1:5002: All connection attempts failed
+[2026-07-21 22:11:46.942] INFO - service B first check: unhealthy
+[2026-07-21 22:11:46.943] ERROR - Failed checking http://127.0.0.1:5003: All connection attempts failed
+[2026-07-21 22:11:46.943] INFO - service C first check: unhealthy
+[2026-07-21 22:11:46.944] ERROR - Failed checking http://127.0.0.1:5004: All connection attempts failed
+[2026-07-21 22:11:46.944] INFO - service D first check: unhealthy
+[2026-07-21 22:11:46.966] ERROR - http://127.0.0.1:9000/health?t=5958c4b983da429a99bc6a6cdec37467 returned HTTP 500
+[2026-07-21 22:11:46.967] ERROR - http://127.0.0.1:9000/health?t=5500d48a7a9141d8b5fac7462104ad2a returned HTTP 500
+[2026-07-21 22:11:46.968] ERROR - http://127.0.0.1:9000/health?t=4e44e564bfa74fdb9dc6fad033ad4fe6 returned HTTP 500
+[2026-07-21 22:11:46.970] ERROR - http://127.0.0.1:9000/health?t=30db5cc78c5f4a08bfaee517dab53445 returned HTTP 500
+[2026-07-21 22:11:46.973] ERROR - http://127.0.0.1:9000/health?t=3075f01e16c74208ba66850748d581f4 returned HTTP 500
+[2026-07-21 22:11:46.973] ERROR - http://127.0.0.1:9000/health?t=7c0c99420fb04d6197f7b6286bf72bbc returned HTTP 500
+[2026-07-21 22:11:46.975] DATABASE - Flushed 8 check result(s) to DB
+[2026-07-21 22:11:46.975] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:46.976] ERROR - http://127.0.0.1:9000/health?t=5748a05e5c8e4e93b6166371199a6011 returned HTTP 500
+[2026-07-21 22:11:47.236] DATABASE - Deleted service 'dummy' (bc1e1da3-4d10-49fd-9c0d-673e39cc485d)
+[2026-07-21 22:11:47.237] SCHEDULER - Stopped check loop for bc1e1da3-4d10-49fd-9c0d-673e39cc485d
+[2026-07-21 22:11:47.238] INFO - Health Monitor Server has stopped running
+[2026-07-21 22:11:47.253] SCHEDULER - Started check loop for 'service B' (58d53a3e-c4da-4c7b-92da-7b586343bb89)
+[2026-07-21 22:11:47.253] SCHEDULER - Started check loop for 'service C' (9b68409d-59b4-4c83-8732-4fef622b3885)
+[2026-07-21 22:11:47.254] SCHEDULER - Started check loop for 'service D' (b068fa5a-df05-4fd0-bdbe-7296ab5b54cb)
+[2026-07-21 22:11:47.254] SCHEDULER - Started check loop for 'dummy' (a81a9fa3-81c7-4fad-92f2-0164713cdb43)
+[2026-07-21 22:11:47.255] SCHEDULER - Started check loop for 'dummy' (4c2fef08-69ba-4d05-826a-449f725e66f7)
+[2026-07-21 22:11:47.255] SCHEDULER - Started check loop for 'dummy' (eff9ab64-42b6-40f7-8536-050ed7a8f9c8)
+[2026-07-21 22:11:47.256] SCHEDULER - Started check loop for 'dummy' (c7360cf3-0bb6-4545-a000-ddd4e808a17e)
+[2026-07-21 22:11:47.256] SCHEDULER - Started check loop for 'dummy' (b916b1d4-a70f-4feb-a962-6b173305fc39)
+[2026-07-21 22:11:47.257] SCHEDULER - Started check loop for 'dummy' (4d4c2c25-f41f-48d1-ad17-c202e02ec59f)
+[2026-07-21 22:11:47.257] SCHEDULER - Started check loop for 'dummy' (afa6dc7b-e592-404a-b4e1-e8e5a3463aeb)
+[2026-07-21 22:11:47.258] SCHEDULER - Startup complete. 10 service loop(s) running
+[2026-07-21 22:11:47.258] INFO - Health Monitor Server has started running
+[2026-07-21 22:11:49.598] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:49.599] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:49.605] DATABASE - Created service 'dummy' (c69e4d3a-2922-434b-9fde-756d540bb878) -> http://127.0.0.1:9000/health?t=3d4ee6ef9ac147668d631aacd1e6b6ea
+[2026-07-21 22:11:49.606] SCHEDULER - Started check loop for 'dummy' (c69e4d3a-2922-434b-9fde-756d540bb878)
+[2026-07-21 22:11:51.604] ERROR - Failed checking http://127.0.0.1:5002: All connection attempts failed
+[2026-07-21 22:11:51.605] INFO - service B first check: unhealthy
+[2026-07-21 22:11:51.606] ERROR - Failed checking http://127.0.0.1:5003: All connection attempts failed
+[2026-07-21 22:11:51.607] INFO - service C first check: unhealthy
+[2026-07-21 22:11:51.607] ERROR - Failed checking http://127.0.0.1:5004: All connection attempts failed
+[2026-07-21 22:11:51.608] INFO - service D first check: unhealthy
+[2026-07-21 22:11:51.987] DATABASE - Flushed 4 check result(s) to DB
+[2026-07-21 22:11:52.598] INFO - dummy first check: healthy
+[2026-07-21 22:11:54.587] DATABASE - Flushed 1 check result(s) to DB
+[2026-07-21 22:11:54.598] ERROR - Timeout checking http://127.0.0.1:9000/health?t=5500d48a7a9141d8b5fac7462104ad2a
+[2026-07-21 22:11:54.598] INFO - dummy first check: timeout
+[2026-07-21 22:11:54.599] ERROR - Timeout checking http://127.0.0.1:9000/health?t=4e44e564bfa74fdb9dc6fad033ad4fe6
+[2026-07-21 22:11:54.600] INFO - dummy first check: timeout
+[2026-07-21 22:11:54.600] ERROR - Timeout checking http://127.0.0.1:9000/health?t=30db5cc78c5f4a08bfaee517dab53445
+[2026-07-21 22:11:54.601] INFO - dummy first check: timeout
+[2026-07-21 22:11:54.602] ERROR - Timeout checking http://127.0.0.1:9000/health?t=3075f01e16c74208ba66850748d581f4
+[2026-07-21 22:11:54.603] INFO - dummy first check: timeout
+[2026-07-21 22:11:54.603] ERROR - Timeout checking http://127.0.0.1:9000/health?t=7c0c99420fb04d6197f7b6286bf72bbc
+[2026-07-21 22:11:54.604] INFO - dummy first check: timeout
+[2026-07-21 22:11:54.849] ERROR - Timeout checking http://127.0.0.1:9000/health?t=3d4ee6ef9ac147668d631aacd1e6b6ea
+[2026-07-21 22:11:54.850] INFO - dummy first check: timeout
+[2026-07-21 22:11:57.252] ERROR - Failed checking http://127.0.0.1:5002: All connection attempts failed
+[2026-07-21 22:11:57.255] ERROR - Timeout checking http://127.0.0.1:9000/health
+[2026-07-21 22:11:57.255] ALERT - dummy changed: unhealthy -> timeout
+[2026-07-21 22:11:57.258] ERROR - Failed checking http://127.0.0.1:5003: All connection attempts failed
+[2026-07-21 22:11:57.267] DATABASE - Flushed 8 check result(s) to DB
+[2026-07-21 22:11:57.532] DATABASE - Deleted service 'dummy' (c69e4d3a-2922-434b-9fde-756d540bb878)
+[2026-07-21 22:11:57.532] SCHEDULER - Stopped check loop for c69e4d3a-2922-434b-9fde-756d540bb878
+[2026-07-21 22:11:57.535] INFO - Health Monitor Server has stopped running
+[2026-07-21 22:11:57.551] SCHEDULER - Started check loop for 'service B' (58d53a3e-c4da-4c7b-92da-7b586343bb89)
+[2026-07-21 22:11:57.552] SCHEDULER - Started check loop for 'service C' (9b68409d-59b4-4c83-8732-4fef622b3885)
+[2026-07-21 22:11:57.552] SCHEDULER - Started check loop for 'service D' (b068fa5a-df05-4fd0-bdbe-7296ab5b54cb)
+[2026-07-21 22:11:57.553] SCHEDULER - Started check loop for 'dummy' (a81a9fa3-81c7-4fad-92f2-0164713cdb43)
+[2026-07-21 22:11:57.553] SCHEDULER - Started check loop for 'dummy' (4c2fef08-69ba-4d05-826a-449f725e66f7)
+[2026-07-21 22:11:57.554] SCHEDULER - Started check loop for 'dummy' (eff9ab64-42b6-40f7-8536-050ed7a8f9c8)
+[2026-07-21 22:11:57.554] SCHEDULER - Started check loop for 'dummy' (c7360cf3-0bb6-4545-a000-ddd4e808a17e)
+[2026-07-21 22:11:57.555] SCHEDULER - Started check loop for 'dummy' (b916b1d4-a70f-4feb-a962-6b173305fc39)
+[2026-07-21 22:11:57.556] SCHEDULER - Started check loop for 'dummy' (4d4c2c25-f41f-48d1-ad17-c202e02ec59f)
+[2026-07-21 22:11:57.557] SCHEDULER - Started check loop for 'dummy' (afa6dc7b-e592-404a-b4e1-e8e5a3463aeb)
+[2026-07-21 22:11:57.558] SCHEDULER - Startup complete. 10 service loop(s) running
+[2026-07-21 22:11:57.558] INFO - Health Monitor Server has started running
+[2026-07-21 22:11:59.910] ERROR - http://127.0.0.1:9000/health?t=5958c4b983da429a99bc6a6cdec37467 returned HTTP 500
+[2026-07-21 22:11:59.911] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:59.913] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:11:59.913] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:59.914] ERROR - http://127.0.0.1:9000/health?t=4e44e564bfa74fdb9dc6fad033ad4fe6 returned HTTP 500
+[2026-07-21 22:11:59.914] INFO - dummy first check: unhealthy
+[2026-07-21 22:11:59.917] INFO - dummy first check: healthy
+[2026-07-21 22:11:59.918] INFO - dummy first check: healthy
+[2026-07-21 22:11:59.920] DATABASE - Created service 'dummy' (938c63aa-5f5c-4e4a-8936-94dbdf042b35) -> http://127.0.0.1:9000/health?t=f688fcf1e32746a8b5f26fb80c1633ac
+[2026-07-21 22:11:59.920] SCHEDULER - Started check loop for 'dummy' (938c63aa-5f5c-4e4a-8936-94dbdf042b35)
+[2026-07-21 22:11:59.921] INFO - dummy first check: healthy
+[2026-07-21 22:11:59.922] INFO - dummy first check: healthy
+[2026-07-21 22:12:00.163] INFO - dummy first check: healthy
+[2026-07-21 22:12:02.821] ERROR - Failed checking http://127.0.0.1:5003: All connection attempts failed
+[2026-07-21 22:12:02.822] INFO - service C first check: unhealthy
+[2026-07-21 22:12:02.823] ERROR - Failed checking http://127.0.0.1:5004: All connection attempts failed
+[2026-07-21 22:12:02.823] INFO - service D first check: unhealthy
+[2026-07-21 22:12:02.824] ERROR - Failed checking http://127.0.0.1:5002: All connection attempts failed
+[2026-07-21 22:12:02.824] INFO - service B first check: unhealthy
+[2026-07-21 22:12:02.841] DATABASE - Flushed 8 check result(s) to DB
+[2026-07-21 22:12:02.842] ALERT - dummy changed: unhealthy -> healthy
+[2026-07-21 22:12:02.843] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:12:02.844] ERROR - http://127.0.0.1:9000/health?t=5500d48a7a9141d8b5fac7462104ad2a returned HTTP 500
+[2026-07-21 22:12:02.845] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:02.845] ERROR - http://127.0.0.1:9000/health?t=30db5cc78c5f4a08bfaee517dab53445 returned HTTP 500
+[2026-07-21 22:12:02.846] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:02.847] ALERT - dummy changed: unhealthy -> healthy
+[2026-07-21 22:12:02.849] ERROR - http://127.0.0.1:9000/health?t=f688fcf1e32746a8b5f26fb80c1633ac returned HTTP 500
+[2026-07-21 22:12:02.850] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:06.300] ERROR - http://127.0.0.1:9000/health?t=5500d48a7a9141d8b5fac7462104ad2a returned HTTP 500
+[2026-07-21 22:12:06.301] ERROR - http://127.0.0.1:9000/health?t=4e44e564bfa74fdb9dc6fad033ad4fe6 returned HTTP 500
+[2026-07-21 22:12:06.302] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:06.304] ERROR - http://127.0.0.1:9000/health returned HTTP 404
+[2026-07-21 22:12:06.305] ALERT - dummy changed: unhealthy -> healthy
+[2026-07-21 22:12:06.305] DATABASE - Flushed 11 check result(s) to DB
+[2026-07-21 22:12:06.306] ERROR - http://127.0.0.1:9000/health?t=3075f01e16c74208ba66850748d581f4 returned HTTP 500
+[2026-07-21 22:12:06.306] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:06.307] ERROR - http://127.0.0.1:9000/health?t=7c0c99420fb04d6197f7b6286bf72bbc returned HTTP 500
+[2026-07-21 22:12:06.307] ALERT - dummy changed: healthy -> unhealthy
+[2026-07-21 22:12:06.308] ERROR - http://127.0.0.1:9000/health?t=f688fcf1e32746a8b5f26fb80c1633ac returned HTTP 500
+[2026-07-21 22:12:06.568] DATABASE - Deleted service 'dummy' (938c63aa-5f5c-4e4a-8936-94dbdf042b35)
+[2026-07-21 22:12:06.569] SCHEDULER - Stopped check loop for 938c63aa-5f5c-4e4a-8936-94dbdf042b35
+[2026-07-21 22:12:06.570] INFO - Health Monitor Server has stopped running

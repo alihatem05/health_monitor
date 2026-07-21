@@ -1,9 +1,12 @@
 import pytest_asyncio
+import pytest
+import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from app.config import TEST_DATABASE_URL
 from app.database import get_db
 from app.main import app
+from app.state import pending_results, running_loops, last_known_status
 from app.models import Base
 
 engine = create_async_engine(TEST_DATABASE_URL)
@@ -12,6 +15,13 @@ TestingSessionLocal = async_sessionmaker(
     class_=AsyncSession,
     expire_on_commit=False,
 )
+
+@pytest.fixture(autouse=True)
+def reset_state():
+    pending_results.clear()
+    running_loops.clear()
+    last_known_status.clear()
+    yield
 
 @pytest_asyncio.fixture(scope="session")
 async def setup_database():
