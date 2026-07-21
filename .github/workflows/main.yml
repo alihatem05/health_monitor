@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             DATABASE_URL: "${{ secrets.DATABASE_URL }}"
-            TEST_DATABASE_URL: " ${{ secrets.TEST_DATABASE_URL }}"
+            TEST_DATABASE_URL: "${{ secrets.TEST_DATABASE_URL }}"
             FLUSH_INTERVAL: "5"
         services:
             postgres:
