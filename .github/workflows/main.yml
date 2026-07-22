@@ -2,6 +2,7 @@ name: health-monitor CI
 
 on:
     push:
+        branches: [main]
 
 jobs:
     test:
@@ -47,3 +48,29 @@ jobs:
             - name: E2E Tests
               run: python -m pytest tests/e2e -v
               
+    build:
+        env:
+            IMAGE_NAME: health-monitor
+        needs: test
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build Image
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+                   -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
+              
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_TOKEN }}
+
+            - name: Push Image to Registry
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} && \
+                   docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
