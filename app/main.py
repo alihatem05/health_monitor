@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
         pending_results.clear()
         await flush(batch)
 
-app = FastAPI(title="Sentinel", lifespan=lifespan)
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
