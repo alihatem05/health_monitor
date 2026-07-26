@@ -28,7 +28,11 @@ resource "aws_security_group" "health_monitor_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
+<<<<<<< HEAD
     cidr_blocks = ["0.0.0.0/0"]
+=======
+    cidr_blocks = [0.0.0.0/0]
+>>>>>>> 1d9b7d5ab57760d8a9c39d91d8aed9f8ff341181
   }
 
   ingress {
